@@ -13,12 +13,14 @@ import { Route, Routes } from '@angular/router';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 
 export const APP_ROUTES: Routes = [
+  // Every user can access these routes
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomepageComponent},
   {path: 'items', component: ItemsComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent},
   {path: 'login', component: LoginComponent},
 
+  // Only logged in users can access these routes
   {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
   {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
   {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
