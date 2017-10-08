@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { APP_ROUTES } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -44,7 +45,7 @@ import { LoginComponent } from './login/login.component';
     AngularFireAuthModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
