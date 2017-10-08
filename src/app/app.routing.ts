@@ -10,6 +10,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { Route, Routes } from '@angular/router';
+import { AdminAuthGuard } from './admin-auth-guard.service';
 
 export const APP_ROUTES: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -22,8 +23,16 @@ export const APP_ROUTES: Routes = [
   {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
   {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
 
-  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard]},
-  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]},
+  {
+    path: 'admin/orders',
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
 
   {path: '**', redirectTo: 'items'}
 ];
