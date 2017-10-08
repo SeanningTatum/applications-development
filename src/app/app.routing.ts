@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ItemsComponent } from './items/items.component';
 import { Route, Routes } from '@angular/router';
 import { AdminAuthGuard } from './admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 export const APP_ROUTES: Routes = [
   // Every user can access these routes
@@ -27,6 +28,16 @@ export const APP_ROUTES: Routes = [
 
   // Only logged in users with isAdmin property can log in
   {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
     path: 'admin/orders',
     component: AdminOrdersComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
@@ -36,6 +47,8 @@ export const APP_ROUTES: Routes = [
     component: AdminProductsComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
+
+
 
   {path: '**', redirectTo: 'items'}
 ];

@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { APP_ROUTES } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -5,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -12,6 +14,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { UserService } from './user.service';
 import { AuthGuard } from './auth-guard.service';
+import { CategoryService } from './category.service';
 import { AuthService } from './auth.service';
 
 import { AppComponent } from './app.component';
@@ -26,6 +29,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AdminAuthGuard } from './admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +53,18 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(APP_ROUTES)
+    FormsModule,
+    RouterModule.forRoot(APP_ROUTES),
+    CustomFormsModule
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGuard],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard,
+    CategoryService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
