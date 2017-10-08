@@ -25,6 +25,7 @@ export const APP_ROUTES: Routes = [
   {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
   {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
 
+  // Only logged in users with isAdmin property can log in
   {
     path: 'admin/orders',
     component: AdminOrdersComponent,

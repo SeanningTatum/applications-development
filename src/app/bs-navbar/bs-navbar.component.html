@@ -17,14 +17,16 @@
       </ng-template>
 
       <!-- Dropdown -->
-      <li ngbDropdown class="nav-item dropdown" *ngIf="auth.user$ | async as user; else anonUser">
+      <li ngbDropdown class="nav-item dropdown" *ngIf="appUser; else anonUser">
         <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdownMenuLink">
-          {{ user.displayName }}
+          {{ appUser.name }}
         </a>
         <div ngbDropdownMenu class="dropdown-menu">
           <a class="dropdown-item" routerLink="/my/orders">My Orders</a>
-          <a class="dropdown-item" routerLink="/admin/orders" >Manage Orders</a>
-          <a class="dropdown-item" routerLink="/admin/products" >Manage Products</a>
+          <ng-container *ngIf="appUser.isAdmin">
+            <a class="dropdown-item" routerLink="/admin/orders">Manage Orders</a>
+            <a class="dropdown-item" routerLink="/admin/products" >Manage Products</a>
+          </ng-container>
           <a class="dropdown-item" (click)="logout()">Log out</a>
         </div>
       </li>
