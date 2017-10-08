@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth-guard.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
@@ -15,11 +16,14 @@ export const APP_ROUTES: Routes = [
   {path: 'home', component: HomepageComponent},
   {path: 'items', component: ItemsComponent},
   {path: 'shopping-cart', component: ShoppingCartComponent},
-  {path: 'checkout', component: CheckoutComponent},
-  {path: 'my/orders', component: MyOrdersComponent},
-  {path: 'order-success', component: OrderSuccessComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'admin/orders', component: AdminOrdersComponent},
-  {path: 'admin/products', component: AdminProductsComponent},
+
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
+  {path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
+  {path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard]},
+
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]},
+
   {path: '**', redirectTo: 'items'}
 ];

@@ -8,11 +8,10 @@ import { Component } from '@angular/core';
 })
 export class BsNavbarComponent {
 
-  constructor(private authService: AuthService) {
-  }
+  constructor(public auth: AuthService) { }
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
   }
 
 }

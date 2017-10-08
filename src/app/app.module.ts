@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { APP_ROUTES } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,7 +46,7 @@ import { LoginComponent } from './login/login.component';
     AngularFireAuthModule,
     RouterModule.forRoot(APP_ROUTES)
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

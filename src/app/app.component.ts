@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  // This code subscribes to the user, checks if there's a
+  // query param, then redirects them once user is logged in
+  constructor(private auth: AuthService, router: Router) {
+    auth.user$.subscribe(user => {
+      if (user) {
+        const returnUrl = localStorage.getItem('returnUrl');
+        router.navigateByUrl(returnUrl);
+      }
+    });
+  }
 }
